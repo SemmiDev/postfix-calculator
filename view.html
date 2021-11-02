@@ -1,0 +1,169 @@
+{{define "form"}}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Postfix Calculator</title>
+    <style>
+        *{
+    		font-family: 'Open Sans', sans-serif;
+		}
+
+		body{
+		    background-color: black;
+		}
+
+		.container{
+		    border-radius: 10px;
+		    position: absolute;
+		    left: 50%;
+		    top: 50%;
+		    transform: translate(-50%,-50%);
+		    padding: 20px 25px;
+		    width: 400px;
+		    background-color: rgba(0,0,0,.7);
+		    box-shadow: 0 0 10px rgba(255,255,255,.3);
+		}
+
+		.container h2{
+		    text-align: center;
+		    color: navajowhite;
+		    margin-bottom: 25px;
+		    text-transform: uppercase;
+		}
+
+		.container form input{
+		    text-align: center;
+		    width: calc(100% - 20px);
+		    padding: 8px 10px;
+		    margin-bottom: 50px;
+		    border: none;
+		    background-color: transparent;
+		    color: #f8b703;
+		    font-size: 18px;
+		}
+
+		.container form button{
+		    border-radius: 5px;
+		    margin: 0 auto;
+		    margin-bottom: 15px;
+		    display: block;
+		    width: 30%;
+		    padding: 10px 0;
+		    cursor: pointer;
+		    border: none;
+		    background-color:#0fa2a9;
+		    font-size: 18px;
+		    color: black;
+		}
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Postfix Calculator</h2>
+        <form method="post" action="/calculate">
+            <input type="text" placeholder="masukkan ekspresi postfix" name="exp" required autofocus autocomplete="off"/>
+            <br>
+            <button type="submit">Kalkulasi</button>
+        </form>
+    </div>
+</body>
+
+</html>
+{{end}}
+{{define "result"}}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Result</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        *{
+    		font-family: 'Open Sans', sans-serif;
+		}
+
+		body{
+		    background-color: black;
+		}
+
+		.container{
+		    border-radius: 10px;
+		    position: absolute;
+		    left: 50%;
+		    top: 50%;
+		    transform: translate(-50%,-50%);
+		    padding: 20px 25px;
+		    width: 400px;
+		    background-color: rgba(0,0,0,.7);
+		    box-shadow: 0 0 10px rgba(255,255,255,.3);
+		}
+
+		.container h2{
+		    text-align: center;
+		    color: navajowhite;
+		    margin-bottom: 25px;
+		    text-transform: uppercase;
+		}
+
+		.container input{
+		    text-align: center;
+		    width: calc(100% - 25px);
+		    padding: 8px 10px;
+		    margin-bottom: 50px;
+		    border: none;
+		    background-color: transparent;
+		    color: #f8b703;
+		    font-size: 20px;
+		}
+
+		input.failed{
+		    text-align: center;
+		    width: calc(100% - 25px);
+		    padding: 8px 10px;
+		    margin-bottom: 50px;
+		    border: none;
+		    background-color: transparent;
+		    color: orangered;
+		    font-size: 17px;
+		}
+
+		.container button{
+		    border-radius: 5px;
+		    margin: 0 auto;
+		    margin-bottom: 15px;
+		    display: block;
+		    width: 45%;
+		    padding: 10px 0;
+		    cursor: pointer;
+		    border: none;
+		    background-color:#0fa2a9;
+		    font-size: 18px;
+		    color: black;
+		}
+
+		a {
+		    text-decoration: none;
+		}
+</style>
+</head>
+
+<body>
+    <div class="container">
+    	{{if .success}}
+    		<h2>RESULT</h2>
+        	<input type="text" disabled value="{{.hasil}}">
+        	<br>
+            <a href="/"><button>Back</button></a>
+    	{{else}}
+    		<h2>FAILED</h2>
+        	<input class="failed" type="text" disabled value="{{.hasil}}">
+            <br>
+            <a href="/"><button>Try Again</button></a>
+        {{end}}
+    </div>
+</body>
+
+</html>
+{{end}}
